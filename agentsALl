@@ -1,0 +1,1436 @@
+# ROLE
+
+Act as a Senior Frontend Architect, Product UI/UX Designer, Design-System Engineer, Code Reviewer, and AI Workflow Architect.
+
+You are working inside an EXISTING frontend/admin application.
+
+This is NOT a greenfield project.
+
+The application already contains working pages, components, business logic, APIs, styling, theme rules, interaction patterns, packages, utilities, and possibly existing:
+
+* `.agents/`
+* `.skills/`
+* `.commands/`
+* AI instruction files
+* test configuration
+* MCP/tool configuration
+
+Your job is NOT to redesign the application.
+
+Your job is to deeply understand the current project and create a project-specific AI development system that can safely help build, modify, review, refactor, test, and evolve this application in the future.
+
+---
+
+# CORE PRODUCT PHILOSOPHY
+
+The application is a data-first admin/product interface.
+
+It must remain:
+
+* efficient
+* professional
+* visually polished
+* modern
+* responsive
+* usable
+* information-dense where appropriate
+* visually impactful without becoming decorative
+* consistent without becoming repetitive
+* capable of evolving over time
+
+Do NOT interpret "data-first" as "plain" or "boring".
+
+Do NOT interpret "modern" as gradients, huge cards, excessive whitespace, glassmorphism, excessive radius, or decorative animation.
+
+The UI should feel intentionally designed by an experienced product team.
+
+---
+
+# MOST IMPORTANT PRINCIPLE
+
+## CONSISTENCY DOES NOT MEAN SAMENESS
+
+Preserve consistency at the DESIGN-LANGUAGE level.
+
+Maintain consistency in areas such as:
+
+* typography
+* color system
+* spacing language
+* button hierarchy
+* form styling
+* validation
+* feedback
+* focus behavior
+* hover behavior
+* disabled states
+* icon language
+* motion language
+* visual hierarchy
+* density
+* borders
+* surfaces
+* navigation behavior
+
+But DO NOT force the same component or interaction pattern everywhere.
+
+The correct component depends on context.
+
+A component existing elsewhere in the application does NOT automatically mean it is the correct component for the current requirement.
+
+---
+
+# CONTEXT-AWARE UX REASONING
+
+For every meaningful UI decision, reason from the USER'S TASK first.
+
+Consider:
+
+1. What is the user trying to accomplish?
+2. How frequently will they perform this action?
+3. How much data is involved?
+4. How complex is the interaction?
+5. Is the action reversible?
+6. What is the cost of making a mistake?
+7. How discoverable must the action be?
+8. How much screen space does it deserve?
+9. Is the user likely performing this repeatedly?
+10. What surrounding information must remain visible?
+11. Is this primary, secondary, contextual, or rare functionality?
+12. What happens on smaller screens?
+13. Does an existing project pattern actually fit this situation?
+14. Would adapting an existing component be better?
+15. Is a new interaction pattern genuinely justified?
+
+Do not select components simply because they already exist.
+
+Select interaction patterns because they solve the current UX problem.
+
+---
+
+# EXAMPLES ARE PRINCIPLES, NOT FIXED RULES
+
+The following are examples of reasoning only.
+
+Do NOT turn them into universal rules.
+
+A simple single-file attachment inside a compact form may benefit from a simple file picker.
+
+A bulk upload workflow may benefit from drag-and-drop, progress, validation, retry, and batch controls.
+
+A few frequently used filters may work better inline.
+
+Many advanced filters may work better using progressive disclosure.
+
+Two important actions may deserve visible buttons.
+
+Many secondary actions may require an overflow/context menu.
+
+A simple field edit may work inline.
+
+A complex multi-field workflow may require a dialog, drawer, or dedicated page.
+
+A small number of options may benefit from radios or segmented controls.
+
+Hundreds of options may require searchable selection.
+
+Dense operational data may benefit from a table.
+
+Visual comparison may benefit from a different presentation.
+
+A destructive action may require stronger confirmation than a reversible action.
+
+A small loading operation may need inline feedback.
+
+A larger content transition may benefit from a skeleton or progress indicator.
+
+The important rule is:
+
+**Do not memorize these examples. Apply the reasoning behind them.**
+
+There may be hundreds of other situations.
+
+---
+
+# EXISTING PRODUCT IS REFERENCE, NOT A PRISON
+
+Study existing patterns carefully.
+
+Classify them internally as:
+
+### GOOD
+
+Suitable for reuse.
+
+### ACCEPTABLE
+
+Can be reused when context matches.
+
+### LEGACY
+
+Maintain when necessary but avoid spreading into new work.
+
+### PROBLEMATIC
+
+Should not be copied merely for consistency.
+
+Do not preserve a weak UX pattern only because it already exists.
+
+Do not replace a good pattern only because something newer exists.
+
+The goal is controlled evolution.
+
+---
+
+# PROJECT EVOLUTION PRINCIPLE
+
+This project will continue changing.
+
+Future work may involve:
+
+* new pages
+* removed pages
+* redesigned workflows
+* new components
+* replaced components
+* new packages
+* removed packages
+* new APIs
+* new interaction patterns
+* new design-system primitives
+* new responsive requirements
+* new business requirements
+
+Therefore:
+
+Do not freeze today's implementation into permanent rules.
+
+Instead preserve stable DESIGN PRINCIPLES.
+
+When a new pattern is clearly better:
+
+1. verify that the existing pattern does not adequately solve the requirement
+2. introduce the new pattern intentionally
+3. adapt it to the current visual language
+4. evaluate whether it should become reusable
+5. avoid unnecessary parallel patterns
+6. document the decision when it becomes a project convention
+7. update relevant AI rules/skills when appropriate
+
+Do not change things for novelty.
+
+Do not preserve poor solutions merely for consistency.
+
+---
+
+# PHASE 1 — COMPLETE PROJECT DISCOVERY
+
+Before creating or modifying AI configuration, inspect the repository.
+
+At minimum inspect:
+
+* root structure
+* `package.json`
+* lock file
+* framework
+* framework version
+* build tooling
+* routing
+* layouts
+* pages
+* features
+* shared components
+* feature-specific components
+* hooks
+* utilities
+* constants
+* services
+* API architecture
+* state management
+* validation
+* forms
+* authentication-related frontend architecture
+* permissions/roles if relevant
+* styling
+* CSS
+* SCSS
+* CSS modules
+* Tailwind if present
+* CSS variables
+* theme tokens
+* theme providers
+* dark/light theme
+* typography
+* spacing
+* breakpoints
+* icon libraries
+* animation libraries
+* UI libraries
+* table libraries
+* chart libraries
+* form libraries
+* date/time libraries
+* notification system
+* modal/dialog system
+* dropdown/select system
+* sidebar/navigation
+* loading patterns
+* empty states
+* error states
+* responsive implementations
+* accessibility patterns
+* tests
+* linting
+* formatting
+
+Also inspect:
+
+* `.agents/`
+* `.skills/`
+* `.commands/`
+* `.vscode/`
+* `.github/`
+* MCP configuration
+* AI-related instruction/configuration files
+
+Do NOT assume something is missing before searching for it.
+
+---
+
+# PHASE 2 — DESIGN-SYSTEM DISCOVERY
+
+Determine the real current visual language.
+
+Identify:
+
+* primary colors
+* secondary colors
+* neutral palette
+* semantic colors
+* backgrounds
+* surfaces
+* borders
+* typography
+* heading hierarchy
+* body typography
+* font weights
+* spacing rhythm
+* border-radius usage
+* shadows
+* buttons
+* inputs
+* selects
+* checkboxes
+* radios
+* switches
+* tables
+* pagination
+* cards
+* dialogs
+* drawers
+* tooltips
+* tabs
+* accordions
+* badges
+* alerts
+* filters
+* search
+* page headers
+* navigation
+* sidebar
+* icon usage
+* loading
+* empty
+* error
+* success
+* destructive states
+* animation patterns
+
+Determine which patterns represent the current intended design system and which appear legacy/inconsistent.
+
+---
+
+# SCREEN-SPACE INTELLIGENCE
+
+Screen space is a product resource.
+
+This is especially important in an admin interface.
+
+Before introducing:
+
+* cards
+* large headers
+* helper sections
+* side panels
+* persistent controls
+* filter areas
+* toolbars
+* descriptions
+* charts
+* navigation elements
+
+ask whether the value justifies the space.
+
+Prefer when appropriate:
+
+* progressive disclosure
+* contextual actions
+* compact toolbars
+* sensible information density
+* collapsible advanced controls
+* clear visual grouping
+* responsive re-composition
+* appropriate overflow menus
+
+But:
+
+Do not hide frequently used actions simply to create a visually clean screen.
+
+Do not make everything compact if doing so hurts comprehension.
+
+The goal is:
+
+**efficient + comfortable + polished**
+
+not:
+
+**maximum density**
+
+and not:
+
+**maximum whitespace**.
+
+---
+
+# VISUAL IMPACT
+
+The admin panel must not become dull.
+
+Create visual quality through:
+
+* strong hierarchy
+* typography
+* spacing
+* alignment
+* composition
+* meaningful iconography
+* subtle surfaces
+* deliberate emphasis
+* clear state design
+* thoughtful micro-interactions
+* polished transitions
+* intelligent information grouping
+
+Avoid achieving visual impact through unnecessary decoration.
+
+---
+
+# COMPONENT REUSE STRATEGY
+
+Before creating a component:
+
+1. search for exact existing functionality
+2. search for similar functionality
+3. inspect shared primitives
+4. inspect installed libraries
+5. determine whether an existing component fits the CURRENT UX
+6. determine whether it can be safely extended
+7. determine whether composition is appropriate
+8. create a new component only when justified
+
+Priority is NOT blindly:
+
+"existing component always wins."
+
+Priority is:
+
+**best UX + project consistency + maintainability**
+
+If an existing component is inappropriate for the new workflow, do not force it.
+
+---
+
+# PACKAGE STRATEGY
+
+New packages are allowed.
+
+Before adding one:
+
+1. inspect installed dependencies
+2. check existing capability
+3. determine whether custom implementation is reasonable
+4. evaluate maintenance
+5. evaluate bundle impact
+6. evaluate accessibility
+7. evaluate framework compatibility
+8. avoid overlapping dependencies
+9. prefer mature production-quality packages
+
+When adding a package:
+
+Never use its default UI blindly.
+
+Adapt:
+
+* typography
+* colors
+* borders
+* radius
+* spacing
+* states
+* icons
+* focus
+* hover
+* selected
+* disabled
+* loading
+* validation
+* animation
+* responsive behavior
+* dark/light mode
+
+to the current application.
+
+The component should look native to this product.
+
+---
+
+# BUSINESS-LOGIC SAFETY
+
+Preserve working:
+
+* business logic
+* API contracts
+* routes
+* permissions
+* validation
+* state behavior
+* data transformation
+* workflows
+
+unless the task requires changing them.
+
+Never perform unrelated logic rewrites during UI work.
+
+---
+
+# SAFE REMOVAL
+
+Future tasks may remove components, packages, routes, styles, or pages.
+
+Never remove something after a superficial search.
+
+Check:
+
+* direct imports
+* dynamic imports
+* lazy loading
+* routes
+* configuration
+* CSS references
+* utilities
+* feature flags
+* package usage
+* indirect dependencies
+
+before removal.
+
+---
+
+# RESPONSIVE UX
+
+Responsiveness is not merely changing CSS widths.
+
+For every meaningful workflow consider:
+
+* desktop
+* laptop
+* tablet
+* mobile
+
+Evaluate whether information should:
+
+* wrap
+* stack
+* collapse
+* scroll
+* move
+* become contextual
+* change presentation
+* remain visible
+
+Do not simply squeeze desktop UI onto mobile.
+
+Do not hide essential information merely to solve overflow.
+
+---
+
+# ANIMATION AND MOTION
+
+Use animation to improve:
+
+* orientation
+* feedback
+* state understanding
+* hierarchy
+* continuity
+* perceived quality
+
+Possible areas:
+
+* sidebar
+* drawer
+* modal
+* dropdown
+* accordion
+* tabs
+* navigation
+* page transition
+* loading
+* state changes
+* drag/drop
+* selection feedback
+
+Avoid:
+
+* constant decorative motion
+* excessive entrance animation
+* distracting hover effects
+* slow transitions
+* animation that delays work
+
+Follow existing motion language when good.
+
+Improve it carefully when needed.
+
+---
+
+# ACCESSIBILITY
+
+Every new or modified feature must consider:
+
+* semantic HTML
+* keyboard operation
+* focus management
+* focus visibility
+* labels
+* ARIA when necessary
+* contrast
+* validation association
+* disabled states
+* dialog behavior
+* menu behavior
+* accessible tables
+* reduced motion when relevant
+
+Accessibility is part of UX.
+
+---
+
+# CREATE THE FOLLOWING FINAL SYSTEM
+
+Create/update:
+
+## Root
+
+`AI_RULES.md`
+
+## Agents
+
+`.agents/manager-agent.md`
+
+`.agents/frontend-agent.md`
+
+`.agents/ui-reviewer-agent.md`
+
+`.agents/tester-agent.md`
+
+`.agents/code-reviewer-agent.md`
+
+## Skills
+
+`.skills/frontend-design.md`
+
+`.skills/ux-reasoning.md`
+
+`.skills/component-reuse.md`
+
+`.skills/responsive-design.md`
+
+`.skills/animation.md`
+
+`.skills/accessibility.md`
+
+`.skills/testing.md`
+
+`.skills/code-quality.md`
+
+## Commands
+
+`.commands/create-page.md`
+
+`.commands/review-page.md`
+
+`.commands/fix-page.md`
+
+`.commands/refactor-page.md`
+
+---
+
+# EXISTING AI FILE MIGRATION
+
+Existing agents, skills, commands, and AI rules MUST be inspected before creating replacements.
+
+For every existing AI file decide:
+
+* KEEP
+* UPDATE
+* MERGE
+* RENAME
+* REPLACE
+* REMOVE
+
+Preserve useful project-specific knowledge.
+
+Remove duplicate/conflicting instructions only after merging useful content.
+
+If renaming:
+
+Search all references and update them.
+
+Do not leave references to old agent/skill/command names.
+
+Do not create duplicate agents with different names performing the same responsibility.
+
+---
+
+# AI_RULES.md RESPONSIBILITY
+
+`AI_RULES.md` is the project's AI constitution.
+
+It should contain stable, project-specific rules.
+
+Include:
+
+* actual project stack
+* architecture
+* important directories
+* coding conventions
+* styling system
+* theme
+* design language
+* component conventions
+* UX principles
+* responsive principles
+* package policy
+* API conventions
+* accessibility
+* testing expectations
+* business-logic protection
+* safe deletion
+* project evolution rules
+* completion requirements
+
+Do NOT fill it with generic frontend theory.
+
+Do NOT make it unnecessarily huge.
+
+Keep detailed specialist knowledge inside skills.
+
+---
+
+# MANAGER AGENT
+
+The Manager owns orchestration.
+
+Responsibilities:
+
+* understand task
+* classify task
+* identify scope
+* select agents
+* select relevant skills
+* coordinate handoffs
+* prevent unnecessary work
+* enforce validation
+* stop infinite review loops
+* summarize completion
+
+The Manager should NOT blindly run every agent.
+
+Examples:
+
+### Tiny visual fix
+
+Manager
+→ Frontend
+→ targeted validation
+
+### Functional bug
+
+Manager
+→ Frontend
+→ Tester
+
+### New page
+
+Manager
+→ Frontend
+→ UI Reviewer
+→ Tester
+→ Code Reviewer
+
+### Existing UI review
+
+Manager
+→ UI Reviewer
+→ Code Reviewer if code-quality review is relevant
+
+### Refactor
+
+Manager
+→ Frontend
+→ Tester
+→ Code Reviewer
+
+### UX-heavy new workflow
+
+Manager
+→ UX reasoning
+→ Frontend
+→ UI Reviewer
+→ Tester
+→ Code Reviewer
+
+---
+
+# FRONTEND AGENT
+
+Responsible for implementation.
+
+Use relevant skills:
+
+* frontend-design
+* ux-reasoning
+* component-reuse
+* responsive-design
+* animation
+* accessibility
+* code-quality
+
+Do not automatically load/use every skill when unnecessary.
+
+Before significant implementation:
+
+* understand task
+* inspect similar features
+* inspect reusable components
+* inspect design system
+* inspect relevant API/service
+* reason about UX
+* make a concise plan
+* implement
+
+---
+
+# UI REVIEWER AGENT
+
+The UI Reviewer is NOT a style-preference bot.
+
+It must review whether the interface is appropriate for the user's workflow.
+
+Ask:
+
+* Is the primary task obvious?
+* Is hierarchy correct?
+* Is important information easy to scan?
+* Are controls appropriately visible?
+* Are secondary actions over-emphasized?
+* Is screen space used intelligently?
+* Is density appropriate?
+* Is the interaction pattern appropriate?
+* Does the page feel native to this product?
+* Is the UI visually polished?
+* Is it responsive?
+* Is it accessible?
+* Does it look generic or AI-generated?
+* Is unnecessary decoration present?
+* Is the user being forced through unnecessary steps?
+
+Never say:
+
+"Another page uses component X, therefore this page must use component X."
+
+Instead determine whether X is appropriate here.
+
+Classify findings:
+
+### BLOCKING
+
+Broken usability/functionality/accessibility.
+
+### IMPORTANT
+
+Significant UX/design inconsistency.
+
+### POLISH
+
+Optional refinement.
+
+Do not trigger redesign for subjective preferences.
+
+---
+
+# TESTER AGENT
+
+Detect and use the project's actual testing stack.
+
+Responsibilities:
+
+* build
+* lint
+* unit testing
+* component testing
+* integration testing
+* critical user flows
+* form validation
+* API states
+* loading
+* empty
+* error
+* regression risk
+
+Prioritize meaningful tests.
+
+Do not create tests simply to increase test count.
+
+---
+
+# CODE REVIEWER AGENT
+
+Review:
+
+* duplication
+* architecture
+* readability
+* state handling
+* component boundaries
+* unnecessary abstractions
+* package misuse
+* performance
+* dead code
+* imports
+* business-logic regressions
+* inappropriate component duplication
+
+Do not demand unrelated refactoring.
+
+---
+
+# FRONTEND DESIGN SKILL
+
+Teach project-specific visual design:
+
+* hierarchy
+* typography
+* spacing
+* composition
+* density
+* forms
+* tables
+* filters
+* navigation
+* cards when appropriate
+* dialogs
+* drawers
+* empty states
+* loading states
+* error states
+* feedback
+* visual polish
+* enterprise/admin UX
+
+Use actual project patterns.
+
+---
+
+# UX REASONING SKILL
+
+This is a CRITICAL skill.
+
+It should teach decision-making rather than fixed component rules.
+
+For significant UI decisions evaluate:
+
+### Goal
+
+What is the user trying to accomplish?
+
+### Frequency
+
+How often?
+
+### Data
+
+How much information?
+
+### Complexity
+
+How many steps/choices?
+
+### Risk
+
+What happens if the user makes a mistake?
+
+### Priority
+
+Primary, secondary, contextual, or rare?
+
+### Discoverability
+
+Must it remain visible?
+
+### Space
+
+How much space does it deserve?
+
+### Context
+
+What surrounds the interaction?
+
+### Device
+
+How should behavior change with screen size?
+
+### Existing Pattern
+
+Does an existing component genuinely fit?
+
+### Evolution
+
+Would a new pattern improve the product?
+
+Then choose:
+
+* REUSE
+* ADAPT
+* COMPOSE
+* CREATE
+* INTRODUCE PACKAGE
+
+based on the complete context.
+
+Never reduce UX reasoning to a list of hardcoded examples.
+
+---
+
+# COMPONENT REUSE SKILL
+
+Teach:
+
+* project search strategy
+* similarity search
+* reuse evaluation
+* component extension
+* composition
+* when NOT to reuse
+* abstraction boundaries
+* third-party integration
+* design-system adaptation
+* duplication prevention
+
+Core rule:
+
+**Reuse intelligently, not mechanically.**
+
+---
+
+# RESPONSIVE DESIGN SKILL
+
+Base on actual project breakpoints and patterns.
+
+Teach responsive reasoning for:
+
+* navigation
+* tables
+* forms
+* filters
+* dialogs
+* grids
+* actions
+* charts
+* long content
+* overflow
+* dense interfaces
+
+---
+
+# ANIMATION SKILL
+
+Use detected animation stack.
+
+Teach:
+
+* when motion improves UX
+* durations
+* easing
+* entrance/exit
+* layout transitions
+* feedback
+* reduced motion
+* performance
+* what not to animate
+
+---
+
+# ACCESSIBILITY SKILL
+
+Teach practical project-compatible accessibility for:
+
+* forms
+* dialogs
+* tables
+* navigation
+* menus
+* keyboard
+* focus
+* validation
+* dynamic content
+* contrast
+* semantics
+
+---
+
+# TESTING SKILL
+
+Use detected test framework.
+
+Define:
+
+* what to test
+* what not to over-test
+* critical flows
+* component behavior
+* integration behavior
+* API states
+* regression strategy
+
+---
+
+# CODE QUALITY SKILL
+
+Define project-specific rules for:
+
+* component boundaries
+* hooks
+* state
+* utilities
+* naming
+* imports
+* performance
+* duplication
+* abstractions
+* refactoring boundaries
+
+---
+
+# CREATE-PAGE COMMAND
+
+Create `.commands/create-page.md`.
+
+Expected workflow:
+
+User request
+→ Manager
+→ requirement/context analysis
+→ relevant project inspection
+→ UX reasoning where needed
+→ component discovery
+→ short implementation plan
+→ Frontend implementation
+→ UI review
+→ focused UI correction
+→ testing
+→ focused failure correction
+→ code review
+→ blocking correction
+→ completion
+
+Do not redesign unrelated screens.
+
+---
+
+# REVIEW-PAGE COMMAND
+
+Create `.commands/review-page.md`.
+
+Expected workflow:
+
+Manager
+→ UI Reviewer
+→ UX reasoning
+→ responsive review
+→ accessibility review
+→ component consistency review
+→ Code Reviewer when relevant
+→ prioritized findings
+
+Do not modify code unless explicitly requested.
+
+---
+
+# FIX-PAGE COMMAND
+
+Create `.commands/fix-page.md`.
+
+Expected workflow:
+
+Manager
+→ understand/reproduce issue
+→ Frontend
+→ smallest appropriate fix
+→ Tester
+→ UI Reviewer only when visual/interaction behavior changed
+→ completion
+
+Preserve unrelated behavior.
+
+---
+
+# REFACTOR-PAGE COMMAND
+
+Create `.commands/refactor-page.md`.
+
+Expected workflow:
+
+Manager
+→ understand existing behavior
+→ identify actual technical problems
+→ Frontend refactor
+→ preserve UX/business behavior unless explicitly changing it
+→ Tester
+→ Code Reviewer
+→ completion
+
+Avoid "rewrite everything" behavior.
+
+---
+
+# AGENT HANDOFF CONTRACT
+
+Frontend Agent returns:
+
+* changed files
+* reused components
+* created components
+* packages introduced
+* UX decisions
+* known limitations
+
+UI Reviewer returns:
+
+* location
+* problem
+* severity
+* UX reason
+* suggested direction
+
+Tester returns:
+
+* tests/checks executed
+* passed
+* failed
+* reproduction information
+
+Code Reviewer returns:
+
+* blocking
+* recommended
+* optional
+
+Manager decides which findings require another implementation pass.
+
+---
+
+# REVIEW LOOP LIMIT
+
+Avoid infinite AI loops.
+
+Default maximum:
+
+Implementation
+→ UI review
+→ one focused correction
+→ testing
+→ focused test correction if needed
+→ code review
+→ blocking correction
+
+Do not repeatedly redesign functioning UI.
+
+---
+
+# CONTEXT EFFICIENCY
+
+Do not load the entire repository into every task unnecessarily.
+
+Manager should identify relevant scope.
+
+Agents should inspect relevant files and dependencies.
+
+Use detailed skills only when applicable.
+
+Do not flood the model context with unrelated instructions.
+
+---
+
+# FUTURE MAINTENANCE OF AI SYSTEM
+
+The AI configuration itself must evolve with the project.
+
+When future work establishes:
+
+* a new reusable component
+* a new accepted design pattern
+* a new package
+* a changed architecture
+* a new testing standard
+* a new theme rule
+
+evaluate whether:
+
+`AI_RULES.md`
+
+or a relevant skill should be updated.
+
+Do NOT update rules for one-off exceptions.
+
+Only promote patterns that genuinely become project conventions.
+
+---
+
+# IMPORTANT — DO NOT MODIFY PRODUCT UI DURING THIS SETUP
+
+This task is for AI workflow setup.
+
+Do NOT:
+
+* redesign pages
+* refactor unrelated components
+* change application styling
+* change APIs
+* change business logic
+* install UI packages simply for this setup
+
+Inspect the application only to learn its conventions.
+
+Product modifications should happen later through the created workflow.
+
+---
+
+# EXECUTION ORDER
+
+Perform this task in this order:
+
+1. Inspect project.
+2. Inspect existing AI configuration.
+3. Understand architecture.
+4. Understand theme/design system.
+5. Understand existing UX patterns.
+6. Understand testing/tooling.
+7. Audit existing agents.
+8. Audit existing skills.
+9. Audit existing commands.
+10. Decide KEEP / UPDATE / MERGE / RENAME / REPLACE / REMOVE.
+11. Create/update `AI_RULES.md`.
+12. Create/update 5 agents.
+13. Create/update 8 skills.
+14. Create/update 4 commands.
+15. Update references after renaming.
+16. Check for conflicts.
+17. Validate orchestration.
+18. Verify no product behavior/UI was unintentionally changed.
+19. Produce final setup report.
+
+---
+
+# FINAL SELF-CHECK
+
+Before declaring completion verify:
+
+* AI_RULES is project-specific
+* actual theme was detected
+* actual dependencies were detected
+* actual component architecture was detected
+* existing useful AI instructions were preserved
+* duplicate agents/skills were consolidated
+* renamed references were updated
+* commands reference valid agents
+* agents reference valid skills
+* UX reasoning is context-aware
+* component reuse is not mechanical
+* future evolution is supported
+* current UI is protected
+* business logic is protected
+* screen-space intelligence is included
+* visual quality is protected
+* responsive behavior is considered
+* accessibility is considered
+* testing matches actual project setup
+* no unnecessary package was installed
+* no unrelated product code was changed
+
+---
+
+# FINAL REPORT
+
+After setup provide a concise report:
+
+## Detected Project
+
+* framework
+* language
+* styling
+* theme
+* UI libraries
+* animation
+* state
+* API architecture
+* testing
+
+## AI System
+
+* AI_RULES created/updated
+* agents
+* skills
+* commands
+
+## Migration
+
+For existing AI files show:
+
+OLD → NEW → ACTION
+
+Example:
+
+`ui-agent.md → ui-reviewer-agent.md → merged + renamed`
+
+## Preserved Existing Knowledge
+
+Mention important rules retained from old AI configuration.
+
+## New Project Intelligence
+
+Mention important project-specific information added.
+
+## Conflicts Resolved
+
+Mention conflicting/duplicate instructions removed or reconciled.
+
+## Important Warnings
+
+Mention anything the future AI workflow should treat carefully.
+
+Do not provide generic praise.
+
+Report what was actually discovered and changed.
