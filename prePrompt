@@ -1,0 +1,36 @@
+# MANDATORY PROJECT WORKFLOW
+
+For every project task:
+
+1. Read and follow `.commands/COMMAND_ROUTER.md`.
+2. Read and follow `AI_RULES.md`.
+3. Understand the user's complete request before making changes.
+4. Inspect only the relevant project context needed for the task.
+5. Route the request through the matching workflow defined in `COMMAND_ROUTER.md`.
+6. Use the Manager Agent as the primary orchestrator for significant tasks.
+7. Invoke/load ONLY the agents required for the selected workflow.
+8. Each agent must use ONLY the skills relevant to the current task.
+9. Do not load every agent or skill by default.
+10. Before introducing a component, pattern, package, or interaction, inspect relevant existing implementations and dependencies.
+11. Preserve applicable business logic, theme language, design principles, architecture, and project conventions.
+12. Existing implementations are references, not mandatory solutions. Use contextual UX reasoning to choose the most appropriate solution.
+13. Maintain design-system consistency without forcing identical interaction patterns across different use cases.
+14. Allow the product to evolve when a new component, interaction, or package provides a clearly better solution.
+15. After implementation, execute only the review/testing workflow required by `COMMAND_ROUTER.md`.
+16. Route failures back to the responsible agent for a targeted correction.
+17. Do not restart the complete workflow for a localized problem.
+18. Do not perform unrelated redesigns, refactors, dependency changes, or business-logic changes.
+19. A task is complete only after the required validation for its selected workflow has passed.
+20. If instructions conflict, use this priority:
+
+    * User's explicit current task
+    * `AI_RULES.md`
+    * `COMMAND_ROUTER.md`
+    * Agent instructions
+    * Skill instructions
+
+# CURRENT TASK
+
+Treat the following as the user's current task and execute it using the mandatory workflow above:
+
+{{tasks}}
